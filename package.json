@@ -2,20 +2,13 @@
   "private": true,
   "scripts": {
     "⬇️⬇️⬇️⬇️⬇️ package ⬇️⬇️⬇️⬇️⬇️": "▼▼▼▼▼ package ▼▼▼▼▼",
-    "build": "lerna exec --scope @uiw/* -- tsbb build && npm run css:build && npm run css:build:dist",
-    "watch": "lerna exec \"tsbb watch\" --scope @uiw/* & npm run css:watch",
-    "css:build": "lerna exec --scope @uiw/* -- compile-less -d src -o esm",
-    "css:watch": "lerna exec --scope @uiw/* -- compile-less -d src -o esm --watch",
-    "css:build:dist": "lerna exec --scope @uiw/* -- compile-less -d src -o lib --combine=dist.css",
-    "bundle": "lerna exec --scope @uiw/* -- ncc build src/index.tsx --target web --filename dist",
-    "bundle:min": "lerna exec --scope @uiw/* -- ncc build src/index.tsx --target web --filename dist --minify",
+    "build": "lerna exec --scope @wcj/* -- tsbb build",
+    "watch": "lerna exec \"tsbb watch\" --scope @wcj/*",
     "⬆️⬆️⬆️⬆️⬆️ package ⬆️⬆️⬆️⬆️⬆️": "▲▲▲▲▲ package ▲▲▲▲▲",
     "start": "lerna exec --scope website -- npm run start",
     "doc": "lerna exec --scope website -- npm run build",
     "bootstrap": "lerna bootstrap",
     "hoist": "lerna bootstrap --hoist",
-    "test": "tsbb test",
-    "coverage": "tsbb test --coverage --bail",
     "prepare": "husky install",
     "version": "lerna version --exact --force-publish --no-push --no-git-tag-version",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
@@ -25,17 +18,6 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx,less,md,json}": [
       "prettier --write"
-    ]
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "<rootDir>/core/src/**/*.{js,jsx,ts,tsx}"
-    ],
-    "testMatch": [
-      "<rootDir>/test/*.{ts,tsx}"
-    ],
-    "transformIgnorePatterns": [
-      "<rootDir>/node_modules/?!(.*)"
     ]
   },
   "workspaces": [

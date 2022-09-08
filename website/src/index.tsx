@@ -1,6 +1,7 @@
-import React from 'react';
+import { Fragment } from 'react';
 import { createRoot } from 'react-dom/client';
 import BackToUp from '@uiw/react-back-to-top';
+import GitHubCorners from '@uiw/react-github-corners';
 import { createGlobalStyle } from 'styled-components';
 import '@wcj/dark-mode';
 import App from './App';
@@ -51,10 +52,11 @@ export const GlobalStyle = createGlobalStyle`
 const container = document.getElementById('root');
 const root = createRoot(container!);
 root.render(
-  <React.StrictMode>
-    <dark-mode permanent dark="Dark" light="Light" style={{ position: 'fixed', top: 8, left: 8, zIndex: 99 }} />
+  <Fragment>
+    {/* <dark-mode permanent dark="Dark" light="Light" style={{ position: 'fixed', top: 8, left: 8, zIndex: 99 }} /> */}
+    <GitHubCorners fixed target="__blank" zIndex={10} size={52} href="https://github.com/jaywcjlove/code-image" />
     <BackToUp>Top</BackToUp>
     <GlobalStyle />
     <App />
-  </React.StrictMode>,
+  </Fragment>,
 );

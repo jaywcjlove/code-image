@@ -1,20 +1,22 @@
 import React from 'react';
-import './styles/index.less';
+import { Warpper } from './components/Warpper';
+import { ToolBar } from './components/toolbar/index';
+import { Provider } from './store/content';
+import EditorContainer from './components/editor';
 
-export interface MonorepoTemplateProps extends React.AllHTMLAttributes<HTMLDivElement> {
+export interface CodeImageProps extends React.PropsWithRef<React.HTMLAttributes<HTMLDivElement>> {
   prefixCls?: string;
 }
 
-export default function MonorepoTemplate(props: MonorepoTemplateProps = {}) {
-  const { className, prefixCls = 'w-template', children, ...others } = props;
+export default function CodeImage(props: CodeImageProps = {}) {
+  const { className, prefixCls = 'w-code-image', ...others } = props;
   const cls = [className, prefixCls].filter(Boolean).join(' ');
   return (
-    <div {...others} className={cls}>
-      {children &&
-        React.Children.map(children, (child) => {
-          if (React.isValidElement(child)) return child;
-          return <span> {child} </span>;
-        })}
-    </div>
+    <Provider>
+      <Warpper {...others} className={cls}>
+        <ToolBar />
+        <EditorContainer />
+      </Warpper>
+    </Provider>
   );
 }

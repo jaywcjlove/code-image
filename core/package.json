@@ -1,12 +1,12 @@
 {
-  "name": "@uiw/react-monorepo-template",
-  "version": "1.1.0",
-  "description": "React Monorepo Template.",
+  "name": "@wcj/code-image",
+  "version": "1.0.0",
+  "description": "Create beautiful images of your source code..",
   "author": "Kenny Wong <wowohoo@qq.com>",
-  "homepage": "https://uiwjs.github.io/react-monorepo-template",
+  "homepage": "https://jaywcjlove.github.io/code-image",
   "repository": {
     "type": "git",
-    "url": "https://github.com/uiwjs/react-monorepo-template.git"
+    "url": "https://github.com/jaywcjlove/code-image.git"
   },
   "license": "MIT",
   "main": "./cjs/index.js",
@@ -22,14 +22,9 @@
     "access": "public"
   },
   "keywords": [
-    "react-monorepo-template",
+    "code-image",
     "react.js",
     "react",
-    "template",
-    "monorepo",
-    "monorepo-template",
-    "uiw",
-    "uiw-react",
     "react-component",
     "component",
     "components",
@@ -43,10 +38,19 @@
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
   },
+  "dependencies": {
+    "@uiw/codemirror-extensions-langs": "^4.12.2",
+    "@uiw/codemirror-themes-all": "^4.12.1",
+    "@uiw/react-codemirror": "^4.12.1",
+    "dom-to-image-more": "^2.6.0",
+    "react-keywords": "^0.0.5",
+    "styled-components": "^5.3.5"
+  },
   "devDependencies": {
     "@babel/runtime": "^7.18.9",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@types/styled-components": "^5.1.26",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
