@@ -38,13 +38,16 @@ const DragWidth = styled.div`
 export default function EditorContainer() {
   const $dom = useRef<HTMLDivElement>(null);
   const $container = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState('520px');
+  const [width, setWidth] = useState<string>();
   const startX = useRef(0);
   const startWidth = useRef(0);
   const { theme, code, lang, setCode, setDomImage } = useContext(Context);
   const extensions = [defaultStyle];
   if (langs[lang]) {
     extensions.push(langs[lang]());
+  }
+  if (startWidth.current) {
+    extensions.push(EditorView.lineWrapping);
   }
   useEffect(() => {
     if ($dom.current) {
@@ -64,7 +67,7 @@ export default function EditorContainer() {
     const newWidth = ev.clientX - startX.current;
     const currentWdith = startWidth.current + newWidth;
     if (currentWdith > 250) {
-      setHeight(`${currentWdith}px`);
+      setWidth(`${currentWdith}px`);
     }
   };
   const onDragEnd = (ev: MouseEvent) => {
@@ -78,7 +81,7 @@ export default function EditorContainer() {
           <DragWidth onMouseDown={handleMouseDown} />
           <CodeMirror
             theme={themes[theme]}
-            width={height}
+            width={width}
             basicSetup={basicSetup}
             placeholder="Please enter your code"
             extensions={extensions}
