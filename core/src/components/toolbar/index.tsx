@@ -35,6 +35,7 @@ export const Button = styled.button<ButtonProps>`
   border-radius: 0.5rem;
   border: 0;
   transition: all 0.3s;
+  background: #efefef;
   svg {
     height: 1.8em;
   }
