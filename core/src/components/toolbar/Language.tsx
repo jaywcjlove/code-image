@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { langs, LanguageName } from '@uiw/codemirror-extensions-langs';
 import styled, { css } from 'styled-components';
-import { Context } from '../../store/content';
 import Keywords from 'react-keywords';
+import { Input } from './Input';
+import { Context } from '../../store/content';
 
 const Warpper = styled.div`
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
@@ -48,15 +49,6 @@ const Header = styled.div<{ active: boolean }>`
     css`
       background-color: #00ea015e;
     `}
-`;
-
-const Input = styled.input`
-  padding: 0.3rem 0.3rem;
-  border: 1px solid #00000024;
-  border-radius: 0.2rem;
-  position: sticky;
-  top: 8px;
-  z-index: 9;
 `;
 
 export const LanguageView = () => {

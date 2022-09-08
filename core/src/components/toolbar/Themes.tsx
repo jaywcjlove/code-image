@@ -39,11 +39,14 @@ const ThemeSample = styled.div`
 `;
 
 const Header = styled.div`
-  background-color: #00000017;
+  background-color: #eaeaea;
   border-radius: 0.2rem;
   display: inline-block;
   padding: 0.1rem 0.3rem;
   margin-bottom: 0.3rem;
+  position: sticky;
+  z-index: 9;
+  top: 0;
 `;
 
 const sampleCode = `import React from 'react';

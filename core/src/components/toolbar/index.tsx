@@ -4,7 +4,8 @@ import { CleanIcon, DownloadIcon, ThemeIcon, SettingIcon, CodeIcon } from '../ic
 import { ThemeView } from './Themes';
 import { DownloadView } from './Download';
 import { LanguageView } from './Language';
-import { Context, ThemeValue } from '../../store/content';
+import { SettingView } from './Setting';
+import { Context, ToolType } from '../../store/content';
 
 export const Warpper = styled.div`
   position: fixed;
@@ -76,14 +77,12 @@ const Aside = styled(Container)`
   overflow: auto;
 `;
 
-type ToolType = 'clean' | 'download' | 'style' | 'lang' | 'setting';
-
 export function ToolBar() {
-  const { setCode } = useContext(Context);
-  const [toolType, setToolType] = useState<ToolType>();
+  const { panel, setPanel, setCode } = useContext(Context);
   const typeHandle = (ev: React.MouseEvent<HTMLButtonElement>) => {
     ev.preventDefault();
-    setToolType(ev.currentTarget.dataset.type as ToolType);
+    const type = ev.currentTarget.dataset.type as ToolType;
+    setPanel(type === panel ? undefined : type);
   };
   const cleanCodeHandle = () => {
     setCode('');
@@ -92,36 +91,41 @@ export function ToolBar() {
     <Warpper>
       <Container>
         <Nav>
-          <Button data-type="clean" active={toolType === 'clean'} onClick={cleanCodeHandle}>
+          <Button data-type="clean" active={panel === 'clean'} onClick={cleanCodeHandle}>
             <CleanIcon />
           </Button>
-          <Button data-type="download" active={toolType === 'download'} onClick={typeHandle}>
+          <Button data-type="download" active={panel === 'download'} onClick={typeHandle}>
             <DownloadIcon />
           </Button>
-          <Button data-type="style" active={toolType === 'style'} onClick={typeHandle}>
+          <Button data-type="style" active={panel === 'style'} onClick={typeHandle}>
             <ThemeIcon />
           </Button>
-          <Button data-type="lang" active={toolType === 'lang'} onClick={typeHandle}>
+          <Button data-type="lang" active={panel === 'lang'} onClick={typeHandle}>
             <CodeIcon />
           </Button>
-          <Button data-type="setting" active={toolType === 'setting'} onClick={typeHandle}>
+          <Button data-type="setting" active={panel === 'setting'} onClick={typeHandle}>
             <SettingIcon />
           </Button>
         </Nav>
       </Container>
-      {toolType === 'style' && (
+      {panel === 'style' && (
         <Aside>
           <ThemeView />
         </Aside>
       )}
-      {toolType === 'download' && (
+      {panel === 'download' && (
         <Aside>
           <DownloadView />
         </Aside>
       )}
-      {toolType === 'lang' && (
+      {panel === 'lang' && (
         <Aside>
           <LanguageView />
+        </Aside>
+      )}
+      {panel === 'setting' && (
+        <Aside>
+          <SettingView />
         </Aside>
       )}
     </Warpper>

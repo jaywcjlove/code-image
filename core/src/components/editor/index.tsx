@@ -1,25 +1,14 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
-import CodeMirror from '@uiw/react-codemirror';
+import React, { useContext, useEffect, useRef } from 'react';
+import CodeMirror, { ReactCodeMirrorProps } from '@uiw/react-codemirror';
 import { EditorView } from '@codemirror/view';
 import * as themes from '@uiw/codemirror-themes-all';
 import { langs } from '@uiw/codemirror-extensions-langs';
+import styled from 'styled-components';
 import { Container, ContainerPadding, EidtorContainer } from '../Container';
 import { Context } from '../../store/content';
-import styled from 'styled-components';
+import { ContextSetting } from '../../store/setting';
 
-const defaultStyle = EditorView.theme({
-  '.cm-gutters': {
-    borderRight: '0',
-  },
-  '.cm-line': {
-    paddingRight: '10px',
-  },
-  '&.cm-editor.cm-focused': {
-    outline: 0,
-  },
-});
-
-const basicSetup = { foldGutter: false };
+const basicSetup: ReactCodeMirrorProps['basicSetup'] = { foldGutter: false };
 const DragWidth = styled.div`
   width: 5px;
   height: 100%;
@@ -38,15 +27,36 @@ const DragWidth = styled.div`
 export default function EditorContainer() {
   const $dom = useRef<HTMLDivElement>(null);
   const $container = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState<string>();
   const startX = useRef(0);
   const startWidth = useRef(0);
   const { theme, code, lang, setCode, setDomImage } = useContext(Context);
+  const { lineNumbers, fontSize, enableShadow, padding, width, setWidth, borderRadius } = useContext(ContextSetting);
+  if (typeof basicSetup === 'object') {
+    basicSetup.lineNumbers = lineNumbers;
+  }
+  const defaultStyle = EditorView.theme({
+    '&.cm-editor': {
+      borderRadius: `${borderRadius}px`,
+      padding: '5px',
+      fontSize: `${fontSize}px`,
+    },
+    '.cm-gutters': {
+      borderRight: '0',
+      backgroundColor: 'transparent !important',
+    },
+    '.cm-line': {
+      paddingRight: '5px',
+    },
+    '&.cm-editor.cm-focused': {
+      outline: 0,
+    },
+  });
+
   const extensions = [defaultStyle];
   if (langs[lang]) {
     extensions.push(langs[lang]());
   }
-  if (startWidth.current) {
+  if (width) {
     extensions.push(EditorView.lineWrapping);
   }
   useEffect(() => {
@@ -67,7 +77,7 @@ export default function EditorContainer() {
     const newWidth = ev.clientX - startX.current;
     const currentWdith = startWidth.current + newWidth;
     if (currentWdith > 250) {
-      setWidth(`${currentWdith}px`);
+      setWidth(String(currentWdith));
     }
   };
   const onDragEnd = (ev: MouseEvent) => {
@@ -76,12 +86,12 @@ export default function EditorContainer() {
   };
   return (
     <EidtorContainer>
-      <ContainerPadding ref={$dom}>
-        <Container ref={$container}>
+      <ContainerPadding ref={$dom} padding={padding}>
+        <Container ref={$container} enableShadow={enableShadow}>
           <DragWidth onMouseDown={handleMouseDown} />
           <CodeMirror
             theme={themes[theme]}
-            width={width}
+            width={`${width}px`}
             basicSetup={basicSetup}
             placeholder="Please enter your code"
             extensions={extensions}

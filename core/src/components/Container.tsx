@@ -1,13 +1,27 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+type ContainerProps = {
+  enableShadow?: boolean;
+};
+
+export const Container = styled.div<ContainerProps>`
   position: relative;
-  box-shadow: rgb(0 0 0 / 25%) 0px 5px 20px 0px;
+  ${(props) =>
+    props.enableShadow &&
+    css`
+      box-shadow: rgb(0 0 0 / 25%) 0px 5px 20px 0px;
+    `}
   min-width: 250px;
 `;
 
-export const ContainerPadding = styled.div`
-  padding: 20px;
+type ContainerPaddingProps = {
+  padding?: number;
+};
+
+export const ContainerPadding = styled.div<ContainerPaddingProps>`
+  ${(props) => css`
+    padding: ${props.padding ? `${props.padding}px` : '20px'};
+  `}
   min-width: 100px;
 `;
 
