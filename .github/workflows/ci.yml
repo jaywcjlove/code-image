@@ -44,11 +44,6 @@ jobs:
           output: website/build/CONTRIBUTORS.svg
           avatarSize: 42
 
-      - name: Create Coverage Badges
-        uses: jaywcjlove/coverage-badges-cli@main
-        with:
-          output: website/build/badges.svg
-
       - name: Is a tag created auto?
         id: create_tag
         uses: jaywcjlove/create-tag-action@main
