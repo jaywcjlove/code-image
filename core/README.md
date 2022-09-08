@@ -5,6 +5,7 @@ Code Image
 
 Create beautiful images of your source code.
 
+![Code Image](https://user-images.githubusercontent.com/1680273/189179463-457bbdef-f32d-4df6-98a6-c98473444b73.png)
 
 ### Using
 
