@@ -1,64 +1,56 @@
-import React from 'react';
+import React, { useReducer } from 'react';
+
+type InitialState = {
+  lineHighlight: boolean;
+  lineNumbers: boolean;
+  enableShadow: boolean;
+  fontSize: number;
+  width: string;
+  borderRadius: number;
+  padding: number;
+  offsetX: number;
+  offsetY: number;
+  blurRadius: number;
+  spreadRadius: number;
+  color: string;
+};
+
+const initialState: InitialState = {
+  lineHighlight: false,
+  lineNumbers: false,
+  enableShadow: true,
+  fontSize: 14,
+  width: '',
+  borderRadius: 5,
+  padding: 20,
+  offsetX: 0,
+  offsetY: 5,
+  blurRadius: 20,
+  spreadRadius: 0,
+  color: 'rgb(0 0 0 / 25%)',
+};
+
+function reducer(state: InitialState, action: Partial<InitialState>) {
+  return { ...state, ...action };
+}
 
 export interface CreateContextSetting {
-  lineHighlight: boolean;
-  setLineHighlight: React.Dispatch<React.SetStateAction<boolean>>;
-  lineNumbers: boolean;
-  setLineNumbers: React.Dispatch<React.SetStateAction<boolean>>;
-  enableShadow: boolean;
-  setEnableShadow: React.Dispatch<React.SetStateAction<boolean>>;
-  fontSize: number;
-  setFontSize: React.Dispatch<React.SetStateAction<number>>;
-  width: string;
-  setWidth: React.Dispatch<React.SetStateAction<string>>;
-  borderRadius: number;
-  setBorderRadius: React.Dispatch<React.SetStateAction<number>>;
-  padding: number;
-  setPadding: React.Dispatch<React.SetStateAction<number>>;
+  state: Partial<InitialState>;
+  dispatch: React.Dispatch<Partial<InitialState>>;
 }
 
 export const ContextSetting = React.createContext<CreateContextSetting>({
-  width: '',
-  setWidth: () => {},
-  lineNumbers: false,
-  setLineNumbers: () => {},
-  lineHighlight: false,
-  setLineHighlight: () => {},
-  enableShadow: true,
-  setEnableShadow: () => {},
-  borderRadius: 5,
-  setBorderRadius: () => {},
-  padding: 20,
-  setPadding: () => {},
-  fontSize: 14,
-  setFontSize: () => {},
+  state: initialState,
+  dispatch: () => {},
 });
 
 export const ProviderSetting: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [fontSize, setFontSize] = React.useState<number>(14);
-  const [lineHighlight, setLineHighlight] = React.useState<boolean>(false);
-  const [lineNumbers, setLineNumbers] = React.useState<boolean>(false);
-  const [enableShadow, setEnableShadow] = React.useState<boolean>(true);
-  const [borderRadius, setBorderRadius] = React.useState<number>(5);
-  const [width, setWidth] = React.useState<string>('');
-  const [padding, setPadding] = React.useState<number>(20);
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <ContextSetting.Provider
       value={{
-        lineHighlight,
-        setLineHighlight,
-        enableShadow,
-        setEnableShadow,
-        width,
-        setWidth,
-        padding,
-        setPadding,
-        lineNumbers,
-        setLineNumbers,
-        borderRadius,
-        setBorderRadius,
-        fontSize,
-        setFontSize,
+        state,
+        dispatch,
       }}
     >
       {children}

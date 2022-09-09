@@ -1,17 +1,26 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 type ContainerProps = {
   enableShadow?: boolean;
+  borderRadius: number;
+  offsetX: number;
+  offsetY: number;
+  blurRadius: number;
+  spreadRadius: number;
+  color: string;
 };
 
-export const Container = styled.div<ContainerProps>`
+export const Container = styled.div<Partial<ContainerProps>>`
   position: relative;
+  min-width: 250px;
   ${(props) =>
     props.enableShadow &&
     css`
-      box-shadow: rgb(0 0 0 / 25%) 0px 5px 20px 0px;
+      border-radius: ${props.borderRadius}px;
+      box-shadow: ${props.color || 'rgb(0 0 0 / 25%)'} ${props.offsetX || 0}px ${props.offsetY || 5}px
+        ${props.blurRadius || 20}px ${props.spreadRadius || 0}px;
     `}
-  min-width: 250px;
 `;
 
 type ContainerPaddingProps = {

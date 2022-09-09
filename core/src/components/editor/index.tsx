@@ -30,8 +30,21 @@ export default function EditorContainer() {
   const startX = useRef(0);
   const startWidth = useRef(0);
   const { theme, code, lang, setCode, setDomImage } = useContext(Context);
-  const { lineNumbers, lineHighlight, fontSize, enableShadow, padding, width, setWidth, borderRadius } =
-    useContext(ContextSetting);
+  const { state, dispatch } = useContext(ContextSetting);
+  const {
+    offsetX,
+    offsetY,
+    blurRadius,
+    spreadRadius,
+    color,
+    lineNumbers,
+    lineHighlight,
+    fontSize,
+    enableShadow,
+    padding,
+    width,
+    borderRadius,
+  } = state;
   if (typeof basicSetup === 'object') {
     basicSetup.lineNumbers = lineNumbers;
   }
@@ -53,6 +66,9 @@ export default function EditorContainer() {
         },
     '.cm-line': {
       paddingRight: '5px',
+    },
+    '.cm-scroller': {
+      fontFamily: 'source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace',
     },
     '&.cm-editor.cm-focused': {
       outline: 0,
@@ -84,7 +100,7 @@ export default function EditorContainer() {
     const newWidth = ev.clientX - startX.current;
     const currentWdith = startWidth.current + newWidth;
     if (currentWdith > 250) {
-      setWidth(String(currentWdith));
+      dispatch({ width: String(currentWdith) });
     }
   };
   const onDragEnd = (ev: MouseEvent) => {
@@ -94,7 +110,16 @@ export default function EditorContainer() {
   return (
     <EidtorContainer>
       <ContainerPadding ref={$dom} padding={padding}>
-        <Container ref={$container} enableShadow={enableShadow}>
+        <Container
+          ref={$container}
+          enableShadow={enableShadow}
+          borderRadius={borderRadius}
+          offsetX={offsetX}
+          offsetY={offsetY}
+          blurRadius={blurRadius}
+          spreadRadius={spreadRadius}
+          color={color}
+        >
           <DragWidth onMouseDown={handleMouseDown} />
           <CodeMirror
             theme={themes[theme]}

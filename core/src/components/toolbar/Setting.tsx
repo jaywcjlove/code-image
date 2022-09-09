@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren, useContext } from 'react';
-import styled from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 import { ContextSetting } from '../../store/setting';
 import { Input } from './Input';
 
@@ -24,35 +24,40 @@ const InputMini = styled(Input)`
 
 interface ItemLabel {
   label?: React.ReactNode;
+  paddingLeft?: number;
 }
 
 const Item: FC<PropsWithChildren<ItemLabel>> = (props) => {
-  const { label, children } = props;
+  const { label, children, paddingLeft } = props;
+  const style: CSSProperties = { paddingLeft };
   return (
     <ItemWarpper>
-      <label>{label}</label>
+      <label style={style}>{label}</label>
       <div>{children}</div>
     </ItemWarpper>
   );
 };
 
+const colorInputStyle: CSSProperties = {
+  padding: 0,
+};
+
 export const SettingView = () => {
+  const { state, dispatch } = useContext(ContextSetting);
   const {
     fontSize,
     width,
+    offsetX,
+    offsetY,
+    blurRadius,
+    spreadRadius,
+    color,
     padding,
     enableShadow,
-    setEnableShadow,
-    setPadding,
-    setWidth,
     borderRadius,
-    setBorderRadius,
-    setFontSize,
     lineHighlight,
-    setLineHighlight,
     lineNumbers,
-    setLineNumbers,
-  } = useContext(ContextSetting);
+  } = state;
   return (
     <Warpper>
       <Item label="Width">
@@ -61,7 +66,7 @@ export const SettingView = () => {
           placeholder="auto"
           min="250"
           value={width}
-          onChange={(ev) => setWidth(ev.target.value)}
+          onChange={(ev) => dispatch({ width: ev.target.value })}
         />
       </Item>
       <Item label="Padding">
@@ -69,24 +74,68 @@ export const SettingView = () => {
           type="number"
           placeholder="auto"
           value={padding}
-          onChange={(ev) => setPadding(Number(ev.target.value))}
+          onChange={(ev) => dispatch({ padding: Number(ev.target.value) })}
         />
       </Item>
       {/* <Item label="Background Color"> </Item> */}
       <Item label="Font Size">
-        <InputMini type="number" value={fontSize} onChange={(ev) => setFontSize(Number(ev.target.value))} />
+        <InputMini type="number" value={fontSize} onChange={(ev) => dispatch({ fontSize: Number(ev.target.value) })} />
       </Item>
       <Item label="Line Numbers">
-        <InputMini type="checkbox" checked={lineNumbers} onChange={(ev) => setLineNumbers(ev.target.checked)} />
+        <InputMini
+          type="checkbox"
+          checked={lineNumbers}
+          onChange={(ev) => dispatch({ lineNumbers: ev.target.checked })}
+        />
       </Item>
       <Item label="Line Highlight">
-        <InputMini type="checkbox" checked={lineHighlight} onChange={(ev) => setLineHighlight(ev.target.checked)} />
-      </Item>
-      <Item label="Shadow">
-        <InputMini type="checkbox" checked={enableShadow} onChange={(ev) => setEnableShadow(ev.target.checked)} />
+        <InputMini
+          type="checkbox"
+          checked={lineHighlight}
+          onChange={(ev) => dispatch({ lineHighlight: ev.target.checked })}
+        />
       </Item>
       <Item label="Border Radius">
-        <InputMini type="number" value={borderRadius} onChange={(ev) => setBorderRadius(Number(ev.target.value))} />
+        <InputMini
+          type="number"
+          value={borderRadius}
+          onChange={(ev) => dispatch({ borderRadius: Number(ev.target.value) })}
+        />
+      </Item>
+      <Item label="Shadow">
+        <InputMini
+          type="checkbox"
+          checked={enableShadow}
+          onChange={(ev) => dispatch({ enableShadow: ev.target.checked })}
+        />
+      </Item>
+      <Item label="Offset X" paddingLeft={10}>
+        <InputMini type="number" value={offsetX} onChange={(ev) => dispatch({ offsetX: Number(ev.target.value) })} />
+      </Item>
+      <Item label="Offset Y" paddingLeft={10}>
+        <InputMini type="number" value={offsetY} onChange={(ev) => dispatch({ offsetY: Number(ev.target.value) })} />
+      </Item>
+      <Item label="Blur Radius" paddingLeft={10}>
+        <InputMini
+          type="number"
+          value={blurRadius}
+          onChange={(ev) => dispatch({ blurRadius: Number(ev.target.value) })}
+        />
+      </Item>
+      <Item label="Spread Radius" paddingLeft={10}>
+        <InputMini
+          type="number"
+          value={spreadRadius}
+          onChange={(ev) => dispatch({ spreadRadius: Number(ev.target.value) })}
+        />
+      </Item>
+      <Item label="Color" paddingLeft={10}>
+        <InputMini
+          type="color"
+          value={color}
+          style={colorInputStyle}
+          onChange={(ev) => dispatch({ color: ev.target.value })}
+        />
       </Item>
     </Warpper>
   );
