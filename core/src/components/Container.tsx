@@ -28,4 +28,5 @@ export const ContainerPadding = styled.div<ContainerPaddingProps>`
 export const EidtorContainer = styled.div`
   border: 2px dotted #b5d4ff;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMUlEQVQ4T2NkYGAQYcAP3uCTZhw1gGGYhAGBZIA/nYDCgBDAm9BGDWAAJyRCgLaBCAAgXwixzAS0pgAAAABJRU5ErkJggg==);
+  background-color: #fff;
 `;

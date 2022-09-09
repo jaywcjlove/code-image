@@ -4,7 +4,7 @@ import BackToUp from '@uiw/react-back-to-top';
 import GitHubCorners from '@uiw/react-github-corners';
 import { createGlobalStyle } from 'styled-components';
 import '@wcj/dark-mode';
-import App from './App';
+import CodeImage from '@wcj/code-image';
 
 export const GlobalStyle = createGlobalStyle`
   [data-color-mode*='dark'], [data-color-mode*='dark'] body {
@@ -47,16 +47,19 @@ export const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+  #root, body, html {
+    height: 100%;
+  }
 `;
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
 root.render(
   <Fragment>
-    {/* <dark-mode permanent dark="Dark" light="Light" style={{ position: 'fixed', top: 8, left: 8, zIndex: 99 }} /> */}
+    <dark-mode permanent dark="Dark" light="Light" style={{ position: 'fixed', top: 8, left: 8, zIndex: 99 }} />
     <GitHubCorners fixed target="__blank" zIndex={10} size={52} href="https://github.com/jaywcjlove/code-image" />
     <BackToUp>Top</BackToUp>
     <GlobalStyle />
-    <App />
+    <CodeImage />
   </Fragment>,
 );

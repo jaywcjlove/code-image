@@ -8,7 +8,7 @@ import { SettingView } from './Setting';
 import { Context, ToolType } from '../../store/content';
 
 export const Warpper = styled.div`
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0;
   height: 100%;

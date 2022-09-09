@@ -1,5 +1,5 @@
 import React from 'react';
-import { Warpper } from './components/Warpper';
+import { Warpper, WarpperOverflow } from './components/Warpper';
 import { ToolBar } from './components/toolbar/index';
 import { Provider } from './store/content';
 import { ProviderSetting } from './store/setting';
@@ -15,10 +15,12 @@ export default function CodeImage(props: CodeImageProps = {}) {
   return (
     <ProviderSetting>
       <Provider>
-        <Warpper {...others} className={cls}>
-          <ToolBar />
-          <EditorContainer />
-        </Warpper>
+        <ToolBar />
+        <WarpperOverflow>
+          <Warpper {...others} className={cls}>
+            <EditorContainer />
+          </Warpper>
+        </WarpperOverflow>
       </Provider>
     </ProviderSetting>
   );
