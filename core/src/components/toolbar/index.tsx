@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, FC, PropsWithRef } from 'react';
 import styled, { css } from 'styled-components';
 import { CleanIcon, DownloadIcon, ThemeIcon, SettingIcon, CodeIcon } from '../icons';
 import { ThemeView } from './Themes';
@@ -35,20 +35,20 @@ export const Button = styled.button<ButtonProps>`
   border-radius: 0.5rem;
   border: 0;
   transition: all 0.3s;
-  background: #efefef;
+  background: var(--color-ci-btn-bg);
   svg {
     height: 1.8em;
   }
   &:hover {
-    background-color: #d3d3d3;
+    background-color: var(--color-ci-btn-hover-bg);
   }
   &:active {
-    background-color: #c5c5c5;
+    background-color: var(--color-ci-btn-bg);
   }
   ${(props) =>
     props.active &&
     css`
-      background-color: #c5c5c5;
+      background-color: var(--color-ci-btn-hover-bg);
     `}
 `;
 
@@ -70,7 +70,7 @@ const Nav = styled.nav`
 const Container = styled.div`
   box-shadow: 0 0 0 1px rgb(0 0 0 / 11%), 1px 1px 5px rgb(0 0 0 / 12%);
   border-radius: 0.3rem;
-  background-color: #ffffffd9;
+  background-color: var(--color-ci-bg);
 `;
 
 const Aside = styled(Container)`
@@ -78,7 +78,9 @@ const Aside = styled(Container)`
   overflow: auto;
 `;
 
-export function ToolBar() {
+interface ToolBarProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+
+export const ToolBar: FC<PropsWithRef<ToolBarProps>> = (props) => {
   const { panel, setPanel, setCode } = useContext(Context);
   const typeHandle = (ev: React.MouseEvent<HTMLButtonElement>) => {
     ev.preventDefault();
@@ -89,7 +91,7 @@ export function ToolBar() {
     setCode('');
   };
   return (
-    <Warpper>
+    <Warpper {...props}>
       <Container>
         <Nav>
           <Button data-type="clean" active={panel === 'clean'} onClick={cleanCodeHandle}>
@@ -131,4 +133,4 @@ export function ToolBar() {
       )}
     </Warpper>
   );
-}
+};

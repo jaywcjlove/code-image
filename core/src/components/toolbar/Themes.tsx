@@ -25,7 +25,7 @@ const ThemeSample = styled.div`
     width: 100%;
     position: absolute;
     cursor: pointer;
-    background-color: #333;
+    background-color: var(--color-ci-btn-hover-bg);
     border-radius: 0.2rem;
     opacity: 0;
     transition: all 0.2s;
@@ -39,7 +39,7 @@ const ThemeSample = styled.div`
 `;
 
 const Header = styled.div`
-  background-color: #eaeaea;
+  background-color: var(--color-ci-btn-bg);
   border-radius: 0.2rem;
   display: inline-block;
   padding: 0.1rem 0.3rem;

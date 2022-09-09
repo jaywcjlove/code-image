@@ -1,6 +1,5 @@
-import React, { FC, PropsWithChildren, useContext, useState } from 'react';
+import React, { FC, PropsWithChildren, useContext } from 'react';
 import styled from 'styled-components';
-import { Context } from '../../store/content';
 import { ContextSetting } from '../../store/setting';
 import { Input } from './Input';
 
@@ -67,7 +66,6 @@ export const SettingView = () => {
         <InputMini
           type="number"
           placeholder="auto"
-          min="250"
           value={padding}
           onChange={(ev) => setPadding(Number(ev.target.value))}
         />
