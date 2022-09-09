@@ -44,6 +44,12 @@ jobs:
           output: website/build/CONTRIBUTORS.svg
           avatarSize: 42
 
+      - uses: actions/upload-artifact@v3
+        with:
+          name: webiste
+          path: |
+            website/build/**
+
       - name: Is a tag created auto?
         id: create_tag
         uses: jaywcjlove/create-tag-action@main
@@ -93,3 +99,65 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
           package: ./core/package.json
+
+
+    outputs:
+      version: ${{ steps.changelog.outputs.version }}
+      create_tag_version: ${{ steps.create_tag.outputs.version }}
+      create_tag_versionNumber: ${{ steps.create_tag.outputs.versionNumber }}
+      tag: ${{ steps.changelog.outputs.tag }}
+      successful: ${{steps.create_tag.outputs.successful }}
+      gh-pages-short-hash: ${{ steps.changelog.outputs.gh-pages-short-hash }}
+
+  docker: 
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: webiste
+          path: website/build
+
+      - run: echo "outputs.version - ${{ needs.build.outputs.version }}"
+      - run: echo "outputs.create_tag_version - ${{ needs.build.outputs.create_tag_version }}"
+      - run: echo "outputs.create_tag_versionNumber - ${{ needs.build.outputs.create_tag_versionNumber }}"
+      - run: echo "outputs.tag - ${{ needs.build.outputs.tag }}"
+
+      # Create Docker Image
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build code-image image
+        working-directory: website
+        run: docker image build -t code-image .
+
+      - name: Tags & Push image (latest)
+        run: |
+          echo "outputs.tag - ${{ needs.build.outputs.version }}"
+          docker tag code-image ${{ secrets.DOCKER_USER }}/code-image:latest
+          docker push ${{ secrets.DOCKER_USER }}/code-image:latest
+      - name: Tags & Push image
+        if: needs.build.outputs.successful
+        run: |
+          echo "outputs.tag - ${{ needs.build.outputs.version }}"
+          docker tag code-image ${{ secrets.DOCKER_USER }}/code-image:${{needs.build.outputs.version}}
+          docker push ${{ secrets.DOCKER_USER }}/code-image:${{needs.build.outputs.version}}
+
+      # Create Docker Image in GitHub
+      - name: Login to GitHub registry
+        run: echo ${{ github.token }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build docker image
+        working-directory: website
+        run: docker build -t ghcr.io/jaywcjlove/code-image:latest .
+
+      - name: Publish to GitHub registry
+        run: docker push ghcr.io/jaywcjlove/code-image:latest
+
+      - name: Tag docker image (beta) and publish to GitHub registry
+        if: needs.build.outputs.successful
+        run: |
+            echo "version: v${{ needs.build.outputs.version }}"
+            docker tag ghcr.io/jaywcjlove/code-image:latest ghcr.io/jaywcjlove/code-image:${{needs.build.outputs.version}}
+            docker push ghcr.io/jaywcjlove/code-image:${{needs.build.outputs.version}}

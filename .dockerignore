@@ -1,0 +1,7 @@
+website/public
+website/src
+node_modules
+README.md
+core
+.husky
+.github
