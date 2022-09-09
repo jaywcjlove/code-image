@@ -1,6 +1,8 @@
 import React from 'react';
 
 export interface CreateContextSetting {
+  lineHighlight: boolean;
+  setLineHighlight: React.Dispatch<React.SetStateAction<boolean>>;
   lineNumbers: boolean;
   setLineNumbers: React.Dispatch<React.SetStateAction<boolean>>;
   enableShadow: boolean;
@@ -20,6 +22,8 @@ export const ContextSetting = React.createContext<CreateContextSetting>({
   setWidth: () => {},
   lineNumbers: false,
   setLineNumbers: () => {},
+  lineHighlight: false,
+  setLineHighlight: () => {},
   enableShadow: true,
   setEnableShadow: () => {},
   borderRadius: 5,
@@ -32,6 +36,7 @@ export const ContextSetting = React.createContext<CreateContextSetting>({
 
 export const ProviderSetting: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [fontSize, setFontSize] = React.useState<number>(14);
+  const [lineHighlight, setLineHighlight] = React.useState<boolean>(false);
   const [lineNumbers, setLineNumbers] = React.useState<boolean>(false);
   const [enableShadow, setEnableShadow] = React.useState<boolean>(true);
   const [borderRadius, setBorderRadius] = React.useState<number>(5);
@@ -40,6 +45,8 @@ export const ProviderSetting: React.FC<React.PropsWithChildren> = ({ children })
   return (
     <ContextSetting.Provider
       value={{
+        lineHighlight,
+        setLineHighlight,
         enableShadow,
         setEnableShadow,
         width,

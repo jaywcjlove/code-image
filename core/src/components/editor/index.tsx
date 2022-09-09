@@ -30,10 +30,12 @@ export default function EditorContainer() {
   const startX = useRef(0);
   const startWidth = useRef(0);
   const { theme, code, lang, setCode, setDomImage } = useContext(Context);
-  const { lineNumbers, fontSize, enableShadow, padding, width, setWidth, borderRadius } = useContext(ContextSetting);
+  const { lineNumbers, lineHighlight, fontSize, enableShadow, padding, width, setWidth, borderRadius } =
+    useContext(ContextSetting);
   if (typeof basicSetup === 'object') {
     basicSetup.lineNumbers = lineNumbers;
   }
+
   const defaultStyle = EditorView.theme({
     '&.cm-editor': {
       borderRadius: `${borderRadius}px`,
@@ -44,6 +46,11 @@ export default function EditorContainer() {
       borderRight: '0',
       backgroundColor: 'transparent !important',
     },
+    '.cm-activeLine, .cm-activeLineGutter': lineHighlight
+      ? {}
+      : {
+          backgroundColor: 'transparent !important',
+        },
     '.cm-line': {
       paddingRight: '5px',
     },

@@ -48,6 +48,8 @@ export const SettingView = () => {
     borderRadius,
     setBorderRadius,
     setFontSize,
+    lineHighlight,
+    setLineHighlight,
     lineNumbers,
     setLineNumbers,
   } = useContext(ContextSetting);
@@ -76,6 +78,9 @@ export const SettingView = () => {
       </Item>
       <Item label="Line Numbers">
         <InputMini type="checkbox" checked={lineNumbers} onChange={(ev) => setLineNumbers(ev.target.checked)} />
+      </Item>
+      <Item label="Line Highlight">
+        <InputMini type="checkbox" checked={lineHighlight} onChange={(ev) => setLineHighlight(ev.target.checked)} />
       </Item>
       <Item label="Shadow">
         <InputMini type="checkbox" checked={enableShadow} onChange={(ev) => setEnableShadow(ev.target.checked)} />
