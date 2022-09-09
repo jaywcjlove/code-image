@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import Keywords from 'react-keywords';
 import { Input } from './Input';
 import { Context } from '../../store/content';
+import { ArrorRightIcon } from '../icons';
 
 const Warpper = styled.div`
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
@@ -14,9 +15,18 @@ const Warpper = styled.div`
   position: relative;
 `;
 
-const LanguageItem = styled.div`
+const Header = styled.div`
+  background-color: var(--color-ci-btn-bg);
+  border-radius: 0.2rem;
+  display: inline-block;
+  padding: 0.1rem 0.3rem;
+`;
+const LanguageItem = styled.div<{ active: boolean }>`
   position: relative;
   padding: 0.3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   &::after {
     content: ' ';
     display: block;
@@ -37,17 +47,12 @@ const LanguageItem = styled.div`
   &:active::after {
     opacity: 0.3;
   }
-`;
-
-const Header = styled.div<{ active: boolean }>`
-  background-color: var(--color-ci-btn-bg);
-  border-radius: 0.2rem;
-  display: inline-block;
-  padding: 0.1rem 0.3rem;
   ${(props) =>
     props.active &&
     css`
-      background-color: #00ea015e;
+      ${Header} {
+        background-color: #00ea015e;
+      }
     `}
 `;
 
@@ -68,10 +73,11 @@ export const LanguageView = () => {
       <Input type="search" value={search} onChange={handleSearch} />
       {(Object.keys(langs) as Array<LanguageName>).filter(filter).map((keyname, index) => {
         return (
-          <LanguageItem key={index} data-theme={keyname} onClick={handleClick}>
-            <Header active={keyname === lang}>
+          <LanguageItem active={keyname === lang} key={index} data-theme={keyname} onClick={handleClick}>
+            <Header>
               <Keywords value={search}>{keyname}</Keywords>
             </Header>
+            {keyname === lang && <ArrorRightIcon width={15} height={15} />}
           </LanguageItem>
         );
       })}

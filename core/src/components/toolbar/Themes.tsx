@@ -4,6 +4,7 @@ import CodeMirror from '@uiw/react-codemirror';
 import { langs } from '@uiw/codemirror-extensions-langs';
 import styled from 'styled-components';
 import { Context, ThemeValue } from '../../store/content';
+import { CheckIcon } from '../icons';
 
 const Warpper = styled.div`
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
@@ -41,7 +42,9 @@ const ThemeSample = styled.div`
 const Header = styled.div`
   background-color: var(--color-ci-btn-bg);
   border-radius: 0.2rem;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 0.1rem 0.3rem;
   margin-bottom: 0.3rem;
   position: sticky;
@@ -57,7 +60,7 @@ export function Demo() {
 
 const basicSetup = { foldGutter: false };
 export const ThemeView = () => {
-  const { setTheme } = useContext(Context);
+  const { setTheme, theme } = useContext(Context);
   const handleClick = (ev: React.MouseEvent<HTMLDivElement>) => {
     setTheme(ev.currentTarget.dataset.theme as ThemeValue);
   };
@@ -66,7 +69,10 @@ export const ThemeView = () => {
       {(Object.keys(themes) as Array<keyof typeof themes>).map((keyname, index) => {
         return (
           <ThemeSample key={index} data-theme={keyname} onClick={handleClick}>
-            <Header>{keyname}</Header>
+            <Header>
+              {keyname}
+              {keyname === theme && <CheckIcon width={15} height={15} fill="#4caf7c" />}
+            </Header>
             <CodeMirror
               value={sampleCode}
               basicSetup={basicSetup}
