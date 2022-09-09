@@ -10,6 +10,8 @@ const HelloWorld = () => {
 export type ToolType = 'clean' | 'download' | 'style' | 'lang' | 'setting' | undefined;
 export type ThemeValue = keyof typeof themes;
 export interface CreateContext {
+  imageName: string;
+  setImageName: React.Dispatch<React.SetStateAction<string>>;
   code: string;
   setCode: React.Dispatch<React.SetStateAction<string>>;
   lang: LanguageName;
@@ -23,6 +25,8 @@ export interface CreateContext {
 }
 
 export const Context = React.createContext<CreateContext>({
+  imageName: 'untitled',
+  setImageName: () => {},
   code: sampleCode,
   setCode: () => {},
   lang: 'jsx',
@@ -36,6 +40,7 @@ export const Context = React.createContext<CreateContext>({
 });
 
 export const Provider: React.FC<React.PropsWithChildren> = ({ children }) => {
+  const [imageName, setImageName] = React.useState<string>('untitled');
   const [code, setCode] = React.useState<string>(sampleCode);
   const [lang, setLang] = React.useState<LanguageName>('jsx');
   const [panel, setPanel] = React.useState<ToolType>();
@@ -44,6 +49,8 @@ export const Provider: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <Context.Provider
       value={{
+        imageName,
+        setImageName,
         code,
         setCode,
         lang,

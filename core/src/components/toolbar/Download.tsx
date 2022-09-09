@@ -5,6 +5,7 @@ import domtoimage from 'dom-to-image-more';
 import { Context } from '../../store/content';
 import { JpgIcon, PngIcon, SvgIcon, DownloadIcon } from '../icons';
 import { BlockButton } from './';
+import { Input } from './Input';
 
 const icons = {
   jpg: <JpgIcon height={26} style={{ color: '#9c27b0' }} />,
@@ -62,16 +63,29 @@ const ScaleToolItem = styled.span<ToolbarItemProps>`
   border-radius: 0.2rem;
   cursor: pointer;
   font-size: 0.8rem;
+  display: inline-block;
+  position: relative;
   ${(props) =>
     props.active &&
     css`
       background-color: rgb(0 0 0 / 29%);
       border-radius: 0.2rem;
+      &::after {
+        content: '  ';
+        display: block;
+        background-color: #333;
+        border-radius: 1px;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        position: absolute;
+        width: 100%;
+      }
     `}
 `;
 
 export const DownloadView = () => {
-  const { domImage } = useContext(Context);
+  const { domImage, imageName, setImageName } = useContext(Context);
   const [type, setType] = useState<keyof typeof icons>('png');
   const [scale, setScale] = useState<number>(2);
   const settingType = (ev: React.MouseEvent<HTMLDivElement>) => {
@@ -100,13 +114,14 @@ export const DownloadView = () => {
 
     fun(domImage, opts).then((dataUrl: string) => {
       const link = document.createElement('a');
-      link.download = `untitled.${type}`;
+      link.download = `${imageName}.${type}`;
       link.href = dataUrl;
       link.click();
     });
   };
   return (
     <Warpper>
+      <Input placeholder="Please enter image name" value={imageName} onChange={(ev) => setImageName(ev.target.value)} />
       <BlockButton onClick={handleDownload}>
         <DownloadIcon />
         <ButtonTitle>Download</ButtonTitle>
