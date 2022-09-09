@@ -1,6 +1,6 @@
 {
   "name": "website",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "scripts": {
     "start": "kkt start",
@@ -12,7 +12,7 @@
     "@uiw/react-back-to-top": "^1.2.1",
     "@uiw/react-github-corners": "^1.5.15",
     "@uiw/react-markdown-preview": "^4.1.0",
-    "@wcj/code-image": "1.0.2",
+    "@wcj/code-image": "1.0.3",
     "@wcj/dark-mode": "^1.0.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
