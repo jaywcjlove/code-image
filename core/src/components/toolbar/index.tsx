@@ -36,19 +36,23 @@ export const Button = styled.button<ButtonProps>`
   border: 0;
   transition: all 0.3s;
   background: var(--color-ci-btn-bg);
+  color: currentColor;
   svg {
     height: 1.8em;
   }
   &:hover {
     background-color: var(--color-ci-btn-hover-bg);
+    color: currentColor;
   }
   &:active {
     background-color: var(--color-ci-btn-bg);
+    color: currentColor;
   }
   ${(props) =>
     props.active &&
     css`
       background-color: var(--color-ci-btn-hover-bg);
+      color: currentColor;
     `}
 `;
 
