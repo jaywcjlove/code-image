@@ -70,6 +70,7 @@ export const windowsStyle = EditorView.theme({
     outline: '0',
   },
   '.cm-panel-title-input': {
+    fontSize: 'inherit',
     color: 'currentColor',
     position: 'absolute',
     top: '0',
