@@ -148,7 +148,6 @@ jobs:
         run: echo ${{ github.token }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build docker image
-        working-directory: website
         run: docker build -t ghcr.io/jaywcjlove/code-image:latest .
 
       - name: Publish to GitHub registry
