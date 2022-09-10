@@ -20,6 +20,28 @@ export default function App() {
 }
 ```
 
+## Docker
+
+```bash
+docker pull wcjiang/code-image
+# Or
+docker pull ghcr.io/jaywcjlove/code-image:latest
+```
+
+```bash
+docker run --name code-image --rm -d -p 9666:3000 wcjiang/code-image:latest
+# Or
+docker run --name code-image -itd -p 9666:3000 wcjiang/code-image:latest
+# Or
+docker run --name wxmp -itd -p 8113:3000 ghcr.io/jaywcjlove/code-image:latest
+```
+
+Visit the following URL in your browser
+
+```bash
+http://localhost:9666/
+```
+
 ## Development
 
 1. Install
