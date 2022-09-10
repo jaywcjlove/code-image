@@ -1,6 +1,9 @@
 import React, { useReducer } from 'react';
 
-type InitialState = {
+export type WindowStyle = 'Windows' | 'MacOS' | 'none';
+
+export type InitialState = {
+  windowStyle: WindowStyle;
   lineHighlight: boolean;
   lineNumbers: boolean;
   enableShadow: boolean;
@@ -16,6 +19,7 @@ type InitialState = {
 };
 
 const initialState: InitialState = {
+  windowStyle: 'MacOS',
   lineHighlight: false,
   lineNumbers: false,
   enableShadow: true,
@@ -27,7 +31,7 @@ const initialState: InitialState = {
   offsetY: 5,
   blurRadius: 20,
   spreadRadius: 0,
-  color: 'rgb(0 0 0 / 25%)',
+  color: '#737373',
 };
 
 function reducer(state: InitialState, action: Partial<InitialState>) {

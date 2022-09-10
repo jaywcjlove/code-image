@@ -1,6 +1,6 @@
 import React, { FC, PropsWithChildren, useContext } from 'react';
 import styled, { CSSProperties } from 'styled-components';
-import { ContextSetting } from '../../store/setting';
+import { ContextSetting, WindowStyle } from '../../store/setting';
 import { Input } from './Input';
 
 const Warpper = styled.div`
@@ -60,6 +60,13 @@ export const SettingView = () => {
   } = state;
   return (
     <Warpper>
+      <Item label="Window Style">
+        <select value={state.windowStyle} onChange={(ev) => dispatch({ windowStyle: ev.target.value as WindowStyle })}>
+          <option value="none">none</option>
+          <option value="Windows">Windows</option>
+          <option value="MacOS">MacOS</option>
+        </select>
+      </Item>
       <Item label="Width">
         <InputMini
           type="number"

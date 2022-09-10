@@ -8,7 +8,7 @@ type ContainerProps = {
   offsetY: number;
   blurRadius: number;
   spreadRadius: number;
-  color: string;
+  shadowColor: string;
 };
 
 export const Container = styled.div<Partial<ContainerProps>>`
@@ -18,7 +18,7 @@ export const Container = styled.div<Partial<ContainerProps>>`
     props.enableShadow &&
     css`
       border-radius: ${props.borderRadius}px;
-      box-shadow: ${props.color || 'rgb(0 0 0 / 25%)'} ${props.offsetX || 0}px ${props.offsetY || 5}px
+      box-shadow: ${props.shadowColor || '#737373'} ${props.offsetX || 0}px ${props.offsetY || 5}px
         ${props.blurRadius || 20}px ${props.spreadRadius || 0}px;
     `}
 `;
