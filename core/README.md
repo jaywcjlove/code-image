@@ -8,7 +8,7 @@ Code Image
 
 Create beautiful images of your source code.
 
-![Code Image](https://user-images.githubusercontent.com/1680273/189277364-6c14be26-b7a4-41ba-bea7-5e8958345457.png)
+[![Code Image](https://user-images.githubusercontent.com/1680273/189277364-6c14be26-b7a4-41ba-bea7-5e8958345457.png)](https://jaywcjlove.github.io/code-image)
 
 ### Using
 
