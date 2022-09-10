@@ -2,6 +2,9 @@ Code Image
 ===
 
 [![Build & Deploy](https://github.com/jaywcjlove/code-image/actions/workflows/ci.yml/badge.svg)](https://github.com/jaywcjlove/code-image/actions/workflows/ci.yml)
+[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/wcjiang/code-image?logo=docker)](https://hub.docker.com/r/wcjiang/code-image)
+[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/wcjiang/code-image?logo=docker)](https://hub.docker.com/r/wcjiang/code-image)
+[![Docker Pulls](https://img.shields.io/docker/pulls/wcjiang/code-image?logo=docker)](https://hub.docker.com/r/wcjiang/code-image)
 
 Create beautiful images of your source code.
 
