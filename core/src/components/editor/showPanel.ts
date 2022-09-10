@@ -2,23 +2,35 @@ import { showPanel } from '@codemirror/view';
 import { EditorView, Panel } from '@codemirror/view';
 import { InitialState } from '../../store/setting';
 
-function headerPanel(style?: InitialState['windowStyle']): (view: EditorView) => Panel {
+type HeaderPanelOptions = {
+  style?: InitialState['windowStyle'];
+  disableTitle?: boolean;
+  title?: string;
+};
+
+function headerPanel(options: HeaderPanelOptions = {}): (view: EditorView) => Panel {
   return (view) => {
     const dom = document.createElement('div');
-    const actions = document.createElement('div');
-    actions.className = 'cm-panel-actions-' + style?.toLocaleLowerCase();
+    if (options.style !== 'none') {
+      const actions = document.createElement('div');
+      actions.className = 'cm-panel-actions-' + options.style?.toLocaleLowerCase();
 
-    const exit = document.createElement('div');
-    exit.className = 'exit';
-    const minimize = document.createElement('div');
-    minimize.className = 'minimize';
-    const maximize = document.createElement('div');
-    maximize.className = 'maximize';
-    actions.appendChild(exit);
-    actions.appendChild(minimize);
-    actions.appendChild(maximize);
-    if (style !== 'none') {
+      const exit = document.createElement('div');
+      exit.className = 'exit';
+      const minimize = document.createElement('div');
+      minimize.className = 'minimize';
+      const maximize = document.createElement('div');
+      maximize.className = 'maximize';
+      actions.appendChild(exit);
+      actions.appendChild(minimize);
+      actions.appendChild(maximize);
       dom.appendChild(actions);
+      if (options.disableTitle) {
+        const input = document.createElement('input');
+        input.className = 'cm-panel-title-input';
+        input.value = options.title || '';
+        dom.appendChild(input);
+      }
     }
     return {
       top: true,
@@ -27,6 +39,6 @@ function headerPanel(style?: InitialState['windowStyle']): (view: EditorView) =>
   };
 }
 
-export function showHeader(style?: InitialState['windowStyle']) {
-  return showPanel.of(headerPanel(style));
+export function showHeader(options?: HeaderPanelOptions) {
+  return showPanel.of(headerPanel(options));
 }

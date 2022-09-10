@@ -7,6 +7,8 @@ export type InitialState = {
   lineHighlight: boolean;
   lineNumbers: boolean;
   enableShadow: boolean;
+  windowTitle: boolean;
+  disableTitle: boolean;
   fontSize: number;
   width: string;
   borderRadius: number;
@@ -22,6 +24,8 @@ const initialState: InitialState = {
   windowStyle: 'MacOS',
   lineHighlight: false,
   lineNumbers: false,
+  windowTitle: true,
+  disableTitle: true,
   enableShadow: true,
   fontSize: 14,
   width: '',

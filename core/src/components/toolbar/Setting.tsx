@@ -57,6 +57,7 @@ export const SettingView = () => {
     borderRadius,
     lineHighlight,
     lineNumbers,
+    disableTitle,
   } = state;
   return (
     <Warpper>
@@ -100,6 +101,13 @@ export const SettingView = () => {
           type="checkbox"
           checked={lineHighlight}
           onChange={(ev) => dispatch({ lineHighlight: ev.target.checked })}
+        />
+      </Item>
+      <Item label="Title">
+        <InputMini
+          type="checkbox"
+          checked={disableTitle}
+          onChange={(ev) => dispatch({ disableTitle: ev.target.checked })}
         />
       </Item>
       <Item label="Border Radius">

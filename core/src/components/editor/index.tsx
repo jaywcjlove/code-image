@@ -8,6 +8,7 @@ import { Container, ContainerPadding, EidtorContainer } from '../Container';
 import { Context } from '../../store/content';
 import { ContextSetting } from '../../store/setting';
 import { showHeader } from './showPanel';
+import { windowsStyle } from './windowsStyle';
 
 const basicSetup: ReactCodeMirrorProps['basicSetup'] = { foldGutter: false };
 const DragWidth = styled.div`
@@ -30,7 +31,7 @@ export default function EditorContainer() {
   const $container = useRef<HTMLDivElement>(null);
   const startX = useRef(0);
   const startWidth = useRef(0);
-  const { theme, code, lang, setCode, setDomImage } = useContext(Context);
+  const { theme, imageName, code, lang, setCode, setDomImage } = useContext(Context);
   const { state, dispatch } = useContext(ContextSetting);
   const {
     windowStyle,
@@ -51,70 +52,6 @@ export default function EditorContainer() {
     basicSetup.lineNumbers = lineNumbers;
   }
 
-  const windowsStyle = EditorView.theme({
-    '.cm-panel-actions-macos': {
-      display: 'flex',
-      gap: '6px',
-      padding: '9px 5px 3px 9px',
-    },
-    '.cm-panel-actions-macos > div': {
-      width: '12px',
-      height: '12px',
-      borderRadius: '50%',
-    },
-    '.cm-panel-actions-macos .exit': {
-      backgroundColor: '#ff5f56',
-      boxShadow: '0 0 1px #e0443e',
-    },
-    '.cm-panel-actions-macos .minimize': {
-      backgroundColor: '#ffbd2e',
-      boxShadow: '0 0 1px #dea123',
-    },
-    '.cm-panel-actions-macos .maximize': {
-      backgroundColor: '#27c93f',
-      boxShadow: '0 0 1px #1aab29',
-    },
-    '.cm-panel-actions-windows': {
-      display: 'flex',
-      float: 'right',
-      gap: '12px',
-      padding: '4px 8px 4px 0',
-    },
-    '.cm-panel-actions-windows > div': {
-      width: '14px',
-      height: '14px',
-    },
-    '.cm-panel-actions-windows .exit': {
-      borderBottom: '2px solid #cfd2d1',
-      top: '-6px',
-      position: 'relative',
-    },
-    '.cm-panel-actions-windows .minimize': {
-      border: '2px solid #cfd2d1',
-      width: '14px',
-      height: '14px',
-    },
-    '.cm-panel-actions-windows .maximize': {
-      width: '16px',
-      height: '16px',
-    },
-    '.cm-panel-actions-windows .maximize::after, .cm-panel-actions-windows .maximize::before': {
-      content: "' '",
-      display: 'inline-block',
-      height: '16px',
-      left: '5px',
-      position: 'relative',
-    },
-    '.cm-panel-actions-windows .maximize::after': {
-      borderRight: '2px solid #cfd2d1',
-      transform: 'rotate(-45deg)',
-    },
-    '.cm-panel-actions-windows .maximize::before': {
-      borderLeft: '2px solid #cfd2d1',
-      transform: 'rotate(45deg)',
-      left: '7px',
-    },
-  });
   const defaultStyle = EditorView.theme({
     '&.cm-editor': {
       borderRadius: `${borderRadius}px`,
@@ -145,7 +82,11 @@ export default function EditorContainer() {
     },
   });
 
-  const extensions = [defaultStyle, windowsStyle, showHeader(windowStyle)];
+  const extensions = [
+    defaultStyle,
+    windowsStyle,
+    showHeader({ style: windowStyle, title: imageName, disableTitle: state.disableTitle }),
+  ];
   if (langs[lang]) {
     extensions.push(langs[lang]());
   }
