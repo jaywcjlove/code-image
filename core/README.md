@@ -32,17 +32,17 @@ docker pull ghcr.io/jaywcjlove/code-image:latest
 ```
 
 ```bash
-docker run --name code-image --rm -d -p 9666:3000 wcjiang/code-image:latest
+docker run --name code-image --rm -d -p 9612:3000 wcjiang/code-image:latest
 # Or
-docker run --name code-image -itd -p 9666:3000 wcjiang/code-image:latest
+docker run --name code-image -itd -p 9612:3000 wcjiang/code-image:latest
 # Or
-docker run --name wxmp -itd -p 8113:3000 ghcr.io/jaywcjlove/code-image:latest
+docker run --name wxmp -itd -p 9612:3000 ghcr.io/jaywcjlove/code-image:latest
 ```
 
 Visit the following URL in your browser
 
 ```bash
-http://localhost:9666/
+http://localhost:9612/
 ```
 
 ## Development
