@@ -71,6 +71,7 @@ export default function EditorContainer() {
       paddingRight: '5px',
     },
     '.cm-panels': {
+      position: 'relative !important',
       backgroundColor: 'transparent !important',
     },
     '.cm-scroller': {
