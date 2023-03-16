@@ -42,7 +42,7 @@
     "@uiw/codemirror-extensions-langs": "^4.12.2",
     "@uiw/codemirror-themes-all": "^4.12.1",
     "@uiw/react-codemirror": "^4.12.1",
-    "dom-to-image-more": "^2.6.0",
+    "dom-to-image-more": "^3.0.0",
     "react-keywords": "^0.0.5",
     "styled-components": "^5.3.5"
   },
