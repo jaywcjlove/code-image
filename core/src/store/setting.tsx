@@ -35,7 +35,7 @@ const initialState: InitialState = {
   offsetY: 5,
   blurRadius: 20,
   spreadRadius: 0,
-  color: '#737373',
+  color: '#0000008f',
 };
 
 function reducer(state: InitialState, action: Partial<InitialState>) {

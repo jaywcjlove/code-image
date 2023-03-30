@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import * as themes from '@uiw/codemirror-themes-all';
 import CodeMirror from '@uiw/react-codemirror';
+import { Extension } from '@codemirror/state';
 import { langs } from '@uiw/codemirror-extensions-langs';
 import styled from 'styled-components';
 import { Context, ThemeValue } from '../../store/content';
 import { CheckIcon } from '../icons';
 
-const Warpper = styled.div`
+const Wrapper = styled.div`
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
   display: flex;
   flex-direction: column;
@@ -65,24 +66,24 @@ export const ThemeView = () => {
     setTheme(ev.currentTarget.dataset.theme as ThemeValue);
   };
   return (
-    <Warpper>
-      {(Object.keys(themes) as Array<keyof typeof themes>).map((keyname, index) => {
+    <Wrapper>
+      {(Object.keys(themes) as Array<keyof typeof themes>).map((keyName, index) => {
         return (
-          <ThemeSample key={index} data-theme={keyname} onClick={handleClick}>
+          <ThemeSample key={index} data-theme={keyName} onClick={handleClick}>
             <Header>
-              {keyname}
-              {keyname === theme && <CheckIcon width={15} height={15} fill="#4caf7c" />}
+              {keyName}
+              {keyName === theme && <CheckIcon width={15} height={15} fill="#4caf7c" />}
             </Header>
             <CodeMirror
               value={sampleCode}
               basicSetup={basicSetup}
               editable={false}
               extensions={[langs.jsx()]}
-              theme={themes[keyname]}
+              theme={themes[keyName] as Extension}
             />
           </ThemeSample>
         );
       })}
-    </Warpper>
+    </Wrapper>
   );
 };

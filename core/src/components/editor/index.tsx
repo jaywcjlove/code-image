@@ -4,6 +4,7 @@ import { EditorView } from '@codemirror/view';
 import * as themes from '@uiw/codemirror-themes-all';
 import { langs } from '@uiw/codemirror-extensions-langs';
 import styled from 'styled-components';
+import { Extension } from '@codemirror/state';
 import { Container, ContainerPadding, EidtorContainer } from '../Container';
 import { Context } from '../../store/content';
 import { ContextSetting } from '../../store/setting';
@@ -134,7 +135,7 @@ export default function EditorContainer() {
         >
           <DragWidth onMouseDown={handleMouseDown} />
           <CodeMirror
-            theme={themes[theme]}
+            theme={themes[theme] as Extension}
             width={`${width}px`}
             basicSetup={basicSetup}
             placeholder="Please enter your code"
