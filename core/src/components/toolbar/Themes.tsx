@@ -65,9 +65,12 @@ export const ThemeView = () => {
   const handleClick = (ev: React.MouseEvent<HTMLDivElement>) => {
     setTheme(ev.currentTarget.dataset.theme as ThemeValue);
   };
+  const themeName = (Object.keys(themes) as Array<keyof typeof themes>).filter(
+    (name) => !/(^defaultSettings|Init$)/.test(name),
+  );
   return (
     <Wrapper>
-      {(Object.keys(themes) as Array<keyof typeof themes>).map((keyName, index) => {
+      {themeName.map((keyName, index) => {
         return (
           <ThemeSample key={index} data-theme={keyName} onClick={handleClick}>
             <Header>
