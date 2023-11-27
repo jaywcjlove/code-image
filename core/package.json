@@ -4,6 +4,7 @@
   "description": "Create beautiful images of your source code..",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://jaywcjlove.github.io/code-image",
+  "funding": "https://jaywcjlove.github.io/#/sponsor",
   "repository": {
     "type": "git",
     "url": "https://github.com/jaywcjlove/code-image.git"
