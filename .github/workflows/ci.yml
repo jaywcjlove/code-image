@@ -85,6 +85,7 @@ jobs:
 
       - run: npm publish --access public --provenance
         name: 📦 @wcj/code-image publish to NPM
+        working-directory: core
         continue-on-error: true
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
