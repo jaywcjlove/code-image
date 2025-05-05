@@ -3,7 +3,7 @@ import { Warpper, WarpperOverflow } from './components/Warpper';
 import { ToolBar } from './components/toolbar/index';
 import { Provider } from './store/content';
 import { ProviderSetting } from './store/setting';
-import EditorContainer from './components/editor';
+import EditorContainer from './components/editor/index';
 
 import { createGlobalStyle } from 'styled-components';
 
