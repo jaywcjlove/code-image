@@ -66,11 +66,12 @@ export const ThemeView = () => {
     setTheme(ev.currentTarget.dataset.theme as ThemeValue);
   };
   const themeName = (Object.keys(themes) as Array<keyof typeof themes>).filter(
-    (name) => !/(^defaultSettings|Init$)/.test(name),
+    (name) => !/(^defaultsettings|init$)/.test(name.toLocaleLowerCase()) && !/(style$)/.test(name.toLocaleLowerCase()),
   );
   return (
     <Wrapper>
       {themeName.map((keyName, index) => {
+        let themefn = themes[keyName] as Extension;
         return (
           <ThemeSample key={index} data-theme={keyName} onClick={handleClick}>
             <Header>
@@ -82,7 +83,7 @@ export const ThemeView = () => {
               basicSetup={basicSetup}
               editable={false}
               extensions={[langs.jsx()]}
-              theme={themes[keyName] as Extension}
+              theme={themefn}
             />
           </ThemeSample>
         );
