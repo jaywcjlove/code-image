@@ -1,3 +1,14 @@
+<div align="center">
+  <a href="https://jaywcjlove.github.io/code-image/">
+    <img alt="Code Image" src="https://user-images.githubusercontent.com/1680273/189277364-6c14be26-b7a4-41ba-bea7-5e8958345457.png" />
+  </a>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+</div>
+
 Code Image
 ===
 
@@ -10,7 +21,7 @@ Code Image
 
 Create beautiful images of your source code.
 
-[![Code Image](https://user-images.githubusercontent.com/1680273/189277364-6c14be26-b7a4-41ba-bea7-5e8958345457.png)](https://jaywcjlove.github.io/code-image)
+[![Code Image](https://github.com/user-attachments/assets/18211e2e-772b-47ea-aa11-d2b4d8f4210c)](https://jaywcjlove.github.io/code-image)
 
 ### Using
 
