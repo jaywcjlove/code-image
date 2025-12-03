@@ -41,9 +41,6 @@
   </a>
   <br>
   <br>
-  <br>
-  <br>
-  <br>
 </div>
 
 Code Image
